@@ -1,5 +1,6 @@
 import Autosuggest from 'react-autosuggest';
 
+
 const getSuggestions = async value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
@@ -12,10 +13,65 @@ const getSuggestions = async value => {
  
 
 const getSuggestionValue = suggestion => suggestion.event;
- 
+
+    const theme = {
+      container: {
+        position: 'relative'
+      },
+      input: {
+        width: '20%',
+        height: '25px',
+        borderRadius: '.25rem', 
+        color: '#495057',
+        lineHeight: '1.5', 
+        fontWeight: '400', 
+        backgroundClip: 'padding-box', 
+        padding: '.375rem .75rem'
+      },
+      inputFocused: {
+        outline: 'none'
+      },
+      inputOpen: {
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0
+      },
+      suggestionsContainer: {
+        display: 'none'
+      },
+      suggestionsContainerOpen: {
+        display: 'block',
+        position: 'absolute',
+        top: 51,
+        width: 280,
+        border: '1px solid #aaa',
+        backgroundColor: '#fff',
+        fontFamily: 'Helvetica, sans-serif',
+        fontWeight: 300,
+        fontSize: 16,
+        borderBottomLeftRadius: 4,
+        borderBottomRightRadius: 4,
+        zIndex: 2
+      },
+      suggestionsList: {
+        margin: 0,
+        padding: 0,
+        listStyleType: 'none',
+      },
+      suggestion: {
+        cursor: 'pointer',
+        padding: '.75rem 1.25rem',
+        marginBottom: '-1px',
+        border: '1px solid rgba(0,0,0,.125)'
+      },
+      suggestionHighlighted: {
+        backgroundColor: '#ddd'
+      }
+    };
+
+
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
-  <div>
+  <div >
     {suggestion.event}
   </div>
 );
@@ -73,7 +129,7 @@ class Example extends React.Component {
     };
  
     return (
-      <Autosuggest
+      <Autosuggest theme={theme}
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
