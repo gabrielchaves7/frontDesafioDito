@@ -1,0 +1,80 @@
+body {
+  width: 100%;
+  margin: 0%;    
+}
+
+.titulo-principal{
+  text-align: center;
+  font-size: 2rem;
+  width: 100%;
+  border-bottom: solid black 0.2em;  
+  background-color: whitesmoke;
+  padding: 1rem;
+  margin-top: 0px;
+  margin-bottom: 40px;
+}
+
+.row-padding{
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.titulo-secundario{
+  text-align: center;
+  font-size: 1.5rem;
+  width: 100%;
+  border: solid blue 0.2em;  
+  background-color: whitesmoke;
+  padding: 1rem;
+  border-radius: 25px;
+}
+
+.div-container-eventos{
+  width: 50%;
+  text-align: center;
+  display: inline-block;
+}
+
+.div-container-timeline{
+  width: 50%;
+  text-align: center;
+  display: inline-block;
+}
+
+.div-center{
+  text-Align: center
+}
+
+.div-input{
+  padding-bottom: 32px;
+}
+
+.tamanho-modal{
+  width: 30%;
+}
+
+.timeline-container {
+  position: relative;
+  margin: 40px 0;
+}
+
+.timeline-item-content {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  border-radius: 25px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  position: relative;
+  width: 400px;
+  max-width: 70%;
+  text-align: center;
+}
+
+
+
+.teste{
+  overflow-y: auto;
+  max-height: 600px;
+}
