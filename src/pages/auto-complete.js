@@ -84,7 +84,7 @@ const getEvents = async (inputValue, inputLength) => {
     listaEventos = [];
   } else {
     const response = await axios.get(
-      'http://localhost:3001/?evento=' + inputValue
+      'http://localhost:3001/autocomplete?evento=' + inputValue
     );
     listaEventos = await response.data.listaEventos;
   }

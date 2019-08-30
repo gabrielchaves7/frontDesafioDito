@@ -10,7 +10,7 @@ function ModalInserirEvento(props) {
   const [selectedDate, handleDateChange] = React.useState(new Date());
 
   async function salvarEvento() {
-    const response = await axios.post(`http://localhost:3001/`, [{event: inputEvento, timestamp: selectedDate }]);
+    const response = await axios.post(`http://localhost:3001/autocomplete`, [{event: inputEvento, timestamp: selectedDate }]);
 
     if (response.data.sucesso) {
       setInputEvento('');

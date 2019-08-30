@@ -8,6 +8,7 @@ import { Button, ButtonToolbar } from 'react-bootstrap';
 import axios from 'axios';
 import TimeLineItem from './pages/timeline';
 import ModalGenerico from './pages/modal-generico';
+import { Map } from "react-lodash"
 
 function App() {
   const [modalInserirEventoShow, setModalInserirEvento] = React.useState(false);
@@ -77,12 +78,11 @@ function App() {
           <h1 className='titulo-secundario'>Timeline compras</h1>
           <Row>
             <Col md={{ span: 8, offset: 2 }} className='teste'>
+
+
               <div className='timeline-container'>
-                {timeLineData.timeline.map((data, idx) => (
-                  <div className='timeline-container'>
-                    <TimeLineItem data={data} />
-                  </div>
-                ))}
+              <Map collection={timeLineData.timeline} iteratee={i => <TimeLineItem data={i} produtos={i.products}></TimeLineItem>} />
+
               </div>
             </Col>
           </Row>

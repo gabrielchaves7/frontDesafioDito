@@ -92,3 +92,7 @@ body {
     color: black;  
     font-size: 24px;
 }
+
+.txt-on-left{
+  text-align: left;
+}
