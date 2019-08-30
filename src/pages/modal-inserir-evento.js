@@ -3,25 +3,29 @@ import { Modal, Button } from 'react-bootstrap';
 import { TextField } from '@material-ui/core';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
+import axios from 'axios';
 
 function ModalInserirEvento(props) {
   const [inputEvento, setInputEvento] = React.useState('');
   const [selectedDate, handleDateChange] = React.useState(new Date());
 
-  const salvarEvento = () => {
-    fetch('http://localhost:3001/', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify([
-        {
-          event: inputEvento,
-          timestamp: selectedDate
-        }
-      ])
-    });
+  async function salvarEvento() {
+    const response = await axios.post(`http://localhost:3001/`, [{event: inputEvento, timestamp: selectedDate }]);
+
+    if (response.data.sucesso) {
+      setInputEvento('');
+      handleDateChange(new Date());
+      props.setMensagemModalGenerico(response.data.mensagem);
+      props.setExibirModalSucesso(true);
+      props.setModalGenerico(true);
+
+      props.onHide();
+    } else {
+      props.setMensagemModalGenerico(response.data.mensagem);
+      props.setExibirModalSucesso(false);
+      props.setModalGenerico(true);
+      props.onHide();
+    }
   };
 
   return (

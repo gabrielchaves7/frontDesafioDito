@@ -67,8 +67,7 @@ body {
   flex-direction: column;
   padding: 15px;
   position: relative;
-  width: 400px;
-  max-width: 70%;
+  width: 600px;
   text-align: center;
 }
 

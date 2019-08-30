@@ -6,30 +6,30 @@ import AutoComplete from './pages/auto-complete';
 import ModalInserirEvento from './pages/modal-inserir-evento';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import axios from 'axios';
-import ModalGenerico from './pages/modal-generico';
 import TimeLineItem from './pages/timeline';
+import ModalGenerico from './pages/modal-generico';
 
 function App() {
-  const [modalShow, setModalShow] = React.useState(false);
-  const [timeLineData, setTimeLineData] = React.useState({ events: [{}] });
+  const [modalInserirEventoShow, setModalInserirEvento] = React.useState(false);
+  const [timeLineData, setTimeLineData] = React.useState({ timeline: [{}] });
+  const [modalGenericoShow, setModalGenerico] = React.useState(false);
+  const [mensagemModalGenerico, setMensagemModalGenerico] = React.useState("");
+  const [exibirModalSucesso, setExibirModalSucesso] = React.useState(false);
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        const response = await axios.get(
-          `https://storage.googleapis.com/dito-questions/events.json`
-        );
+      const response = await axios.get(
+        `http://localhost:3001/listarDadosTimeLine`
+      );
 
-        setTimeLineData(response.data);
-      } catch (e) {
-        console.error(e);
-      }
+      setTimeLineData(response.data);
     }
     fetchData();
   }, []);
 
   return (
     <div>
+      <ModalGenerico ehsucesso={exibirModalSucesso} mensagem={mensagemModalGenerico} show={modalGenericoShow} onHide={() => setModalGenerico(false)} />
       <Row className='justify-content-md-center'>
         <Col md='12'>
           <h1 className='titulo-principal'>Desafio Dito</h1>
@@ -61,11 +61,11 @@ function App() {
               <Row>
                 <Col md='12'>
                   <ButtonToolbar>
-                    <Button variant='success' onClick={() => setModalShow(true)}>
+                    <Button variant='success' onClick={() => setModalInserirEvento(true)}>
                       Inserir novo Evento
                     </Button>
 
-                    <ModalGenerico show={modalShow} ehsucesso={true} mensagem="Testando Mensagem!" onHide={() => setModalShow(false)} />
+                    <ModalInserirEvento show={modalInserirEventoShow} setModalGenerico={setModalGenerico} setExibirModalSucesso={setExibirModalSucesso} setMensagemModalGenerico={setMensagemModalGenerico} onHide={() => setModalInserirEvento(false)} />
                   </ButtonToolbar>
                 </Col>
               </Row>
@@ -76,9 +76,9 @@ function App() {
         <Col md='6'>
           <h1 className='titulo-secundario'>Timeline compras</h1>
           <Row>
-            <Col md={{ span: 8, offset: 3 }} className='teste'>
+            <Col md={{ span: 8, offset: 2 }} className='teste'>
               <div className='timeline-container'>
-                {timeLineData.events.map((data, idx) => (
+                {timeLineData.timeline.map((data, idx) => (
                   <div className='timeline-container'>
                     <TimeLineItem data={data} />
                   </div>

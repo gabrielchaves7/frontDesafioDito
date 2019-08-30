@@ -1,5 +1,6 @@
 import Autosuggest from 'react-autosuggest';
 import React from 'react';
+import axios from 'axios';
 
 const theme = {
   container: {
@@ -78,16 +79,19 @@ const renderSuggestion = suggestion => (
 
 const getEvents = async (inputValue, inputLength) => {
   var listaEventos;
+
   if (inputLength < 2) {
     listaEventos = [];
   } else {
-    const response = await fetch('http://localhost:3001/?evento=' + inputValue);
-    listaEventos = await response.json();
+    const response = await axios.get(
+      'http://localhost:3001/?evento=' + inputValue
+    );
+    listaEventos = await response.data.listaEventos;
   }
-
 
   return listaEventos;
 };
+
 
 class AutoComplete extends React.Component {
   constructor() {
@@ -127,7 +131,7 @@ class AutoComplete extends React.Component {
     };
 
     return (
-      <Autosuggest theme={theme} 
+      <Autosuggest theme={theme}
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
